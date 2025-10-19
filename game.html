@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎃 Halloween Bingo - Vòng Xoay Kinh Dị</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="halloween-bg">
+        <div class="pumpkins pumpkin-1">🎃</div>
+        <div class="pumpkins pumpkin-2">🎃</div>
+        <div class="pumpkins pumpkin-3">🎃</div>
+        <div class="ghosts ghost-1">👻</div>
+        <div class="ghosts ghost-2">👻</div>
+        <div class="ghosts ghost-3">👻</div>
+        <div class="bats bat-1">🦇</div>
+        <div class="bats bat-2">🦇</div>
+        <div class="bats bat-3">🦇</div>
+        <div class="bats bat-4">🦇</div>
+        <div class="bats bat-5">🦇</div>
+        <div class="vampire vampire-1">🧛</div>
+        <div class="vampire vampire-2">🧛‍♀️</div>
+        <div class="zombie zombie-1">🧟</div>
+        <div class="zombie zombie-2">🧟‍♀️</div>
+        <div class="skull-float skull-1">💀</div>
+        <div class="skull-float skull-2">💀</div>
+    </div>
+
+    <div class="container">
+        <h1>🎃 Halloween Bingo 👻<br><span class="subtitle">Vòng Xoay Kinh Dị</span></h1>
+        
+        <div class="game-page">
+            <!-- Nút quay về -->
+            <div class="back-section">
+                <button class="btn-back" onclick="backToManagement()">
+                    ← Quay lại quản lý
+                </button>
+            </div>
+
+            <!-- Grid layout cho vòng xoay và câu hỏi ngang hàng -->
+            <div class="game-grid">
+                <!-- Phần vòng xoay -->
+                <div class="wheel-section">
+                    <h2>🎡 Vòng Xoay Kinh Hoàng</h2>
+                    <div class="wheel-container">
+                        <canvas id="wheelCanvas" width="400" height="400"></canvas>
+                        <div class="wheel-pointer">💀</div>
+                    </div>
+                    <button class="btn-spin" onclick="spinWheel()" id="spinBtn">
+                        <span class="skull">💀</span> QUAY VÒNG XOAY <span class="skull">💀</span>
+                    </button>
+                    <div class="question-count">
+                        <span class="pumpkin">🎃</span> Số câu hỏi: <span id="questionCount">0</span>
+                    </div>
+                </div>
+
+                <!-- Phần hiển thị câu hỏi và đáp án -->
+                <div class="question-display" id="questionDisplay">
+                    <h2>👻 Câu Hỏi Ma Quái</h2>
+                    <div class="question-text" id="questionText">
+                        Nhấn vào vòng xoay để bắt đầu phiêu lưu kinh hoàng! 🎃
+                    </div>
+                    <div class="answers-grid" id="answersGrid"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>

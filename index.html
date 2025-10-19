@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎃 Halloween Bingo - Quản Lý Câu Hỏi</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="halloween-bg">
+        <div class="pumpkins pumpkin-1">🎃</div>
+        <div class="pumpkins pumpkin-2">🎃</div>
+        <div class="pumpkins pumpkin-3">🎃</div>
+        <div class="ghosts ghost-1">👻</div>
+        <div class="ghosts ghost-2">👻</div>
+        <div class="ghosts ghost-3">👻</div>
+        <div class="bats bat-1">🦇</div>
+        <div class="bats bat-2">🦇</div>
+        <div class="bats bat-3">🦇</div>
+        <div class="bats bat-4">🦇</div>
+        <div class="bats bat-5">🦇</div>
+        <div class="vampire vampire-1">🧛</div>
+        <div class="vampire vampire-2">🧛‍♀️</div>
+        <div class="zombie zombie-1">🧟</div>
+        <div class="zombie zombie-2">🧟‍♀️</div>
+        <div class="skull-float skull-1">💀</div>
+        <div class="skull-float skull-2">💀</div>
+    </div>
+
+    <div class="container">
+        <h1>🎃 Halloween Bingo 👻<br><span class="subtitle">Quản Lý Câu Hỏi Ma Quái</span></h1>
+        
+        <div class="management-page">
+                <!-- Phần thêm/sửa câu hỏi -->
+                <div class="add-question-section">
+                    <h2>
+                        <span id="formTitle">🦇 Thêm Câu Hỏi Mới</span>
+                    </h2>
+                    <div class="form-group">
+                        <label>🕷️ Câu hỏi:</label>
+                        <input type="text" id="questionInput" placeholder="Nhập câu hỏi ma quái...">
+                    </div>
+                    <div class="form-group">
+                        <label>🕸️ Đáp án 1:</label>
+                        <div class="answer-input-group">
+                            <input type="text" id="answer1" placeholder="Đáp án 1...">
+                            <input type="radio" name="correctAnswer" value="0" id="correct1">
+                            <label for="correct1" class="radio-label">✓ Đúng</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>🕸️ Đáp án 2:</label>
+                        <div class="answer-input-group">
+                            <input type="text" id="answer2" placeholder="Đáp án 2...">
+                            <input type="radio" name="correctAnswer" value="1" id="correct2">
+                            <label for="correct2" class="radio-label">✓ Đúng</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>🕸️ Đáp án 3:</label>
+                        <div class="answer-input-group">
+                            <input type="text" id="answer3" placeholder="Đáp án 3...">
+                            <input type="radio" name="correctAnswer" value="2" id="correct3">
+                            <label for="correct3" class="radio-label">✓ Đúng</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>🕸️ Đáp án 4:</label>
+                        <div class="answer-input-group">
+                            <input type="text" id="answer4" placeholder="Đáp án 4...">
+                            <input type="radio" name="correctAnswer" value="3" id="correct4">
+                            <label for="correct4" class="radio-label">✓ Đúng</label>
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button class="btn-add" onclick="saveQuestion()" id="saveBtn">
+                            <span id="btnText">Thêm Câu Hỏi</span>
+                        </button>
+                        <button class="btn-cancel" onclick="cancelEdit()" id="cancelBtn" style="display: none;">
+                            Hủy Bỏ
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Danh sách câu hỏi -->
+                <div class="questions-list-section">
+                    <h2>📋 Danh Sách Câu Hỏi (<span id="questionCount">5</span> câu)</h2>
+                    <div id="questionsList" class="questions-list"></div>
+                </div>
+
+                <!-- Nút bắt đầu game -->
+                <div class="start-game-section">
+                    <button class="btn-start-game" onclick="startGame()">
+                        <span class="icon">🎃</span>
+                        BẮT ĐẦU CHƠI GAME
+                        <span class="icon">👻</span>
+                    </button>
+                    <p class="note">* Đảm bảo bạn đã thêm ít nhất 1 câu hỏi trước khi bắt đầu!</p>
+                </div>
+            </div>
+        </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,1175 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a0b2e 0%, #2d1b4e 50%, #1a0b2e 100%);
+    min-height: 100vh;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Halloween Background Animation */
+.halloween-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+}
+
+.pumpkins, .ghosts, .bats, .vampire, .zombie, .skull-float {
+    position: absolute;
+    font-size: 40px;
+    opacity: 0.3;
+}
+
+/* Bí ngô */
+.pumpkin-1 {
+    top: 5%;
+    left: 10%;
+    animation: float 15s infinite ease-in-out;
+    animation-delay: 0s;
+}
+
+.pumpkin-2 {
+    top: 60%;
+    right: 8%;
+    animation: float 18s infinite ease-in-out;
+    animation-delay: 3s;
+    font-size: 50px;
+}
+
+.pumpkin-3 {
+    bottom: 10%;
+    left: 15%;
+    animation: spin-float 20s infinite ease-in-out;
+    animation-delay: 5s;
+}
+
+/* Ma */
+.ghost-1 {
+    top: 20%;
+    right: 15%;
+    animation: ghost-fly 25s infinite ease-in-out;
+    animation-delay: 2s;
+}
+
+.ghost-2 {
+    top: 70%;
+    left: 5%;
+    animation: ghost-fly 20s infinite ease-in-out;
+    animation-delay: 8s;
+    font-size: 35px;
+}
+
+.ghost-3 {
+    top: 40%;
+    right: 5%;
+    animation: ghost-wave 15s infinite ease-in-out;
+    animation-delay: 4s;
+}
+
+/* Dơi */
+.bat-1 {
+    top: 15%;
+    left: 20%;
+    animation: bat-fly 8s infinite linear;
+    animation-delay: 0s;
+    font-size: 30px;
+}
+
+.bat-2 {
+    top: 50%;
+    right: 25%;
+    animation: bat-fly 10s infinite linear;
+    animation-delay: 2s;
+}
+
+.bat-3 {
+    bottom: 20%;
+    left: 30%;
+    animation: bat-zigzag 7s infinite ease-in-out;
+    animation-delay: 4s;
+    font-size: 35px;
+}
+
+.bat-4 {
+    top: 80%;
+    right: 10%;
+    animation: bat-circle 12s infinite linear;
+    animation-delay: 5s;
+}
+
+.bat-5 {
+    top: 30%;
+    left: 50%;
+    animation: bat-zigzag 9s infinite ease-in-out;
+    animation-delay: 1s;
+}
+
+/* Ma cà rồng */
+.vampire-1 {
+    top: 25%;
+    left: 8%;
+    animation: vampire-float 22s infinite ease-in-out;
+    animation-delay: 1s;
+    font-size: 45px;
+}
+
+.vampire-2 {
+    bottom: 15%;
+    right: 20%;
+    animation: vampire-fly 25s infinite ease-in-out;
+    animation-delay: 6s;
+    font-size: 42px;
+}
+
+/* Thây ma */
+.zombie-1 {
+    top: 55%;
+    left: 12%;
+    animation: zombie-walk 30s infinite ease-in-out;
+    animation-delay: 4s;
+    font-size: 38px;
+}
+
+.zombie-2 {
+    bottom: 25%;
+    right: 15%;
+    animation: zombie-walk 28s infinite ease-in-out;
+    animation-delay: 9s;
+}
+
+/* Đầu lâu */
+.skull-1 {
+    top: 45%;
+    right: 30%;
+    animation: skull-bounce 16s infinite ease-in-out;
+    animation-delay: 3s;
+    font-size: 32px;
+}
+
+.skull-2 {
+    bottom: 30%;
+    left: 25%;
+    animation: skull-spin 20s infinite ease-in-out;
+    animation-delay: 7s;
+}
+
+/* Animations */
+@keyframes float {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg); 
+        opacity: 0.3;
+    }
+    50% { 
+        transform: translateY(-40px) rotate(10deg); 
+        opacity: 0.5;
+    }
+}
+
+@keyframes spin-float {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg) scale(1); 
+    }
+    50% { 
+        transform: translateY(-30px) rotate(180deg) scale(1.2); 
+    }
+}
+
+@keyframes ghost-fly {
+    0% { 
+        transform: translate(0, 0) scale(1);
+        opacity: 0.3;
+    }
+    20% { 
+        transform: translate(-60px, -100px) scale(1.15);
+        opacity: 0.6;
+    }
+    40% { 
+        transform: translate(-30px, -160px) scale(0.85);
+        opacity: 0.45;
+    }
+    60% { 
+        transform: translate(40px, -120px) scale(1.2);
+        opacity: 0.5;
+    }
+    80% { 
+        transform: translate(20px, -60px) scale(0.95);
+        opacity: 0.4;
+    }
+    100% { 
+        transform: translate(0, 0) scale(1);
+        opacity: 0.3;
+    }
+}
+
+@keyframes ghost-wave {
+    0%, 100% { 
+        transform: translateX(0) rotate(0deg) scale(1);
+    }
+    20% { 
+        transform: translateX(-40px) rotate(-12deg) scale(1.1);
+    }
+    40% { 
+        transform: translateX(-60px) rotate(-18deg) scale(0.95);
+    }
+    60% { 
+        transform: translateX(60px) rotate(18deg) scale(1.05);
+    }
+    80% { 
+        transform: translateX(40px) rotate(12deg) scale(1.08);
+    }
+}
+
+@keyframes bat-fly {
+    0% { 
+        transform: translateX(0) translateY(0) rotate(0deg);
+    }
+    25% { 
+        transform: translateX(-120px) translateY(-60px) rotate(-25deg);
+    }
+    50% { 
+        transform: translateX(-200px) translateY(40px) rotate(20deg);
+    }
+    75% { 
+        transform: translateX(-120px) translateY(-40px) rotate(-20deg);
+    }
+    100% { 
+        transform: translateX(0) translateY(0) rotate(0deg);
+    }
+}
+
+@keyframes bat-zigzag {
+    0%, 100% { 
+        transform: translate(0, 0) scaleX(-1) rotate(0deg);
+    }
+    15% { 
+        transform: translate(60px, -50px) scaleX(-1) rotate(15deg);
+    }
+    30% { 
+        transform: translate(-40px, -100px) scaleX(1) rotate(-15deg);
+    }
+    45% { 
+        transform: translate(50px, -150px) scaleX(-1) rotate(20deg);
+    }
+    60% { 
+        transform: translate(-30px, -120px) scaleX(1) rotate(-10deg);
+    }
+    75% { 
+        transform: translate(40px, -80px) scaleX(-1) rotate(12deg);
+    }
+    90% { 
+        transform: translate(-20px, -40px) scaleX(1) rotate(-8deg);
+    }
+}
+
+@keyframes bat-circle {
+    0% { 
+        transform: rotate(0deg) translateX(100px) rotate(0deg);
+    }
+    100% { 
+        transform: rotate(360deg) translateX(100px) rotate(-360deg);
+    }
+}
+
+@keyframes vampire-float {
+    0%, 100% { 
+        transform: translateY(0) rotate(0deg);
+        opacity: 0.3;
+    }
+    33% { 
+        transform: translateY(-60px) rotate(-5deg);
+        opacity: 0.5;
+    }
+    66% { 
+        transform: translateY(-40px) rotate(5deg);
+        opacity: 0.4;
+    }
+}
+
+@keyframes vampire-fly {
+    0% { 
+        transform: translate(0, 0) scaleX(-1);
+    }
+    50% { 
+        transform: translate(-80px, -100px) scaleX(-1) rotate(-10deg);
+    }
+    100% { 
+        transform: translate(0, 0) scaleX(-1);
+    }
+}
+
+@keyframes zombie-walk {
+    0%, 100% { 
+        transform: translateX(0) rotate(0deg);
+        opacity: 0.3;
+    }
+    50% { 
+        transform: translateX(-50px) rotate(-5deg);
+        opacity: 0.45;
+    }
+}
+
+@keyframes skull-bounce {
+    0%, 100% { 
+        transform: translateY(0) rotate(0deg) scale(1);
+    }
+    20% { 
+        transform: translateY(-60px) rotate(72deg) scale(1.1);
+    }
+    40% { 
+        transform: translateY(-120px) rotate(144deg) scale(1.2);
+    }
+    60% { 
+        transform: translateY(-160px) rotate(216deg) scale(1.15);
+    }
+    80% { 
+        transform: translateY(-100px) rotate(288deg) scale(1.05);
+    }
+}
+
+@keyframes skull-spin {
+    0%, 100% { 
+        transform: rotate(0deg) scale(1);
+        opacity: 0.3;
+    }
+    25% { 
+        transform: rotate(90deg) scale(1.2);
+        opacity: 0.5;
+    }
+    50% { 
+        transform: rotate(180deg) scale(1.4);
+        opacity: 0.6;
+    }
+    75% { 
+        transform: rotate(270deg) scale(1.2);
+        opacity: 0.5;
+    }
+}
+
+.container {
+    max-width: 1600px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+h1 {
+    text-align: center;
+    color: #ff6b00;
+    font-size: 3em;
+    margin-bottom: 30px;
+    text-shadow: 0 0 20px #ff6b00, 0 0 40px #ff0000, 3px 3px 10px rgba(0, 0, 0, 0.8);
+    animation: glow 2s ease-in-out infinite;
+}
+
+.subtitle {
+    font-size: 0.5em;
+    color: #ffa500;
+    display: block;
+    margin-top: 10px;
+}
+
+@keyframes glow {
+    0%, 100% { text-shadow: 0 0 20px #ff6b00, 0 0 40px #ff0000, 3px 3px 10px rgba(0, 0, 0, 0.8); }
+    50% { text-shadow: 0 0 30px #ff6b00, 0 0 60px #ff0000, 3px 3px 15px rgba(0, 0, 0, 0.8); }
+}
+
+h2 {
+    color: #ff6b00;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+    text-shadow: 0 0 10px #ff6b00;
+}
+
+/* Layout cho trang quản lý */
+.management-page {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Layout cho trang game */
+.game-page {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Grid layout cho vòng xoay và câu hỏi ngang hàng */
+.game-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+/* Phần thêm câu hỏi */
+.add-question-section {
+    background: linear-gradient(135deg, #2d1b4e 0%, #1a0b2e 100%);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 107, 0, 0.3);
+    border: 2px solid #ff6b00;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #ffa500;
+    text-shadow: 0 0 5px #ff6b00;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ff6b00;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: all 0.3s;
+    background: #1a0b2e;
+    color: #fff;
+}
+
+.form-group input::placeholder {
+    color: #888;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #ffa500;
+    box-shadow: 0 0 15px rgba(255, 107, 0, 0.5);
+}
+
+/* Answer input group với radio button */
+.answer-input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.answer-input-group input[type="text"] {
+    flex: 1;
+}
+
+.answer-input-group input[type="radio"] {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #ff6b00;
+}
+
+.answer-input-group .radio-label {
+    color: #ffa500;
+    font-size: 0.9em;
+    cursor: pointer;
+    user-select: none;
+}
+
+.answer-input-group .radio-label:hover {
+    color: #ff6b00;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-add, .btn-cancel {
+    flex: 1;
+    padding: 15px;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-add {
+    background: linear-gradient(135deg, #ff6b00 0%, #ff0000 100%);
+    box-shadow: 0 0 20px rgba(255, 107, 0, 0.5);
+}
+
+.btn-add:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 107, 0, 0.6), 0 0 30px rgba(255, 107, 0, 0.4);
+}
+
+.btn-add:active {
+    transform: translateY(0);
+}
+
+.btn-cancel {
+    background: linear-gradient(135deg, #666 0%, #444 100%);
+}
+
+.btn-cancel:hover {
+    background: linear-gradient(135deg, #888 0%, #666 100%);
+    transform: translateY(-2px);
+}
+
+/* Phần bắt đầu game */
+.start-game-section {
+    text-align: center;
+    padding: 30px;
+    background: linear-gradient(135deg, #2d1b4e 0%, #1a0b2e 100%);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 107, 0, 0.3);
+    border: 2px solid #ff6b00;
+}
+
+.btn-start-game {
+    padding: 20px 60px;
+    background: linear-gradient(135deg, #ff6b00 0%, #ff0000 100%);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.5em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 0 30px rgba(255, 107, 0, 0.6);
+    margin-bottom: 15px;
+}
+
+.btn-start-game .icon {
+    display: inline-block;
+    animation: wiggle 1s infinite;
+    font-size: 1.2em;
+}
+
+.btn-start-game:hover {
+    transform: scale(1.05) translateY(-5px);
+    box-shadow: 0 10px 30px rgba(255, 107, 0, 0.8), 0 0 50px rgba(255, 0, 0, 0.6);
+}
+
+.btn-start-game:active {
+    transform: scale(0.98);
+}
+
+.start-game-section .note {
+    color: #ffa500;
+    font-size: 0.9em;
+    margin-top: 10px;
+}
+
+/* Nút quay lại */
+.back-section {
+    width: 100%;
+    text-align: left;
+}
+
+.btn-back {
+    padding: 12px 30px;
+    background: linear-gradient(135deg, #666 0%, #444 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-back:hover {
+    background: linear-gradient(135deg, #888 0%, #666 100%);
+    transform: translateX(-5px);
+}
+
+/* Danh sách câu hỏi */
+.questions-list-section {
+    background: linear-gradient(135deg, #2d1b4e 0%, #1a0b2e 100%);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 107, 0, 0.3);
+    border: 2px solid #ff6b00;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.questions-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.question-item {
+    background: #1a0b2e;
+    border: 2px solid #ff6b00;
+    border-radius: 10px;
+    padding: 15px;
+    transition: all 0.3s;
+}
+
+.question-item:hover {
+    border-color: #ffa500;
+    box-shadow: 0 0 15px rgba(255, 107, 0, 0.5);
+}
+
+.question-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.question-number {
+    color: #ffa500;
+    font-weight: 700;
+    font-size: 1.2em;
+}
+
+.question-item-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-edit, .btn-delete {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.3s;
+}
+
+.btn-edit {
+    background: #ffa500;
+    color: #1a0b2e;
+}
+
+.btn-edit:hover {
+    background: #ff6b00;
+    transform: scale(1.05);
+}
+
+.btn-delete {
+    background: #ff0000;
+    color: white;
+}
+
+.btn-delete:hover {
+    background: #cc0000;
+    transform: scale(1.05);
+}
+
+.question-item-text {
+    color: #fff;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.question-item-answers {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 5px;
+    font-size: 0.9em;
+}
+
+.question-item-answer {
+    background: #2d1b4e;
+    padding: 8px;
+    border-radius: 5px;
+    color: #ccc;
+    border: 1px solid #ff6b00;
+}
+
+.question-item-answer.correct-answer {
+    background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%);
+    color: #000;
+    font-weight: bold;
+    border: 2px solid #00ff00;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+/* Phần vòng xoay */
+.wheel-section {
+    background: linear-gradient(135deg, #2d1b4e 0%, #1a0b2e 100%);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 107, 0, 0.3);
+    border: 2px solid #ff6b00;
+    text-align: center;
+    width: 100%;
+}
+
+.wheel-container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+    margin: 20px auto;
+}
+
+#wheelCanvas {
+    border-radius: 50%;
+    box-shadow: 0 0 40px rgba(255, 107, 0, 0.6), 0 0 80px rgba(255, 0, 0, 0.4);
+}
+
+.wheel-pointer {
+    position: absolute;
+    top: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 45px;
+    filter: drop-shadow(0 0 15px #ff6b00);
+    z-index: 10;
+    animation: vampire-point 2s infinite ease-in-out;
+}
+
+@keyframes vampire-point {
+    0%, 100% { 
+        transform: translateX(-50%) translateY(0) scale(1); 
+        filter: drop-shadow(0 0 15px #ff6b00);
+    }
+    50% { 
+        transform: translateX(-50%) translateY(-10px) scale(1.1); 
+        filter: drop-shadow(0 0 25px #ff0000);
+    }
+}
+
+.btn-spin {
+    padding: 15px 40px;
+    background: linear-gradient(135deg, #ff6b00 0%, #ff0000 100%);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.2em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin: 20px 0;
+    box-shadow: 0 0 20px rgba(255, 107, 0, 0.6);
+}
+
+.btn-spin .skull {
+    display: inline-block;
+    animation: shake 0.5s infinite;
+}
+
+@keyframes shake {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg); }
+    75% { transform: rotate(10deg); }
+}
+
+.btn-spin:hover:not(:disabled) {
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px rgba(255, 107, 0, 0.8), 0 0 40px rgba(255, 0, 0, 0.6);
+}
+
+.btn-spin:active:not(:disabled) {
+    transform: scale(0.98);
+}
+
+.btn-spin:disabled {
+    background: #444;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.question-count {
+    font-size: 1.1em;
+    color: #ffa500;
+    margin-top: 10px;
+    text-shadow: 0 0 10px #ff6b00;
+}
+
+.question-count span {
+    font-weight: 700;
+    color: #ff6b00;
+}
+
+.pumpkin {
+    display: inline-block;
+    animation: wiggle 1s infinite;
+}
+
+@keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-5deg); }
+    75% { transform: rotate(5deg); }
+}
+
+/* Phần hiển thị câu hỏi */
+.question-display {
+    background: linear-gradient(135deg, #2d1b4e 0%, #1a0b2e 100%);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5), 0 0 30px rgba(255, 107, 0, 0.3);
+    border: 2px solid #ff6b00;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 500px;
+}
+
+.question-text {
+    background: linear-gradient(135deg, #ff6b00 0%, #ff0000 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 1.3em;
+    font-weight: 600;
+    margin-bottom: 20px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(255, 107, 0, 0.6);
+}
+
+.answers-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.answer-box {
+    background: #1a0b2e;
+    border: 3px solid #ff6b00;
+    border-radius: 10px;
+    padding: 20px;
+    font-size: 1.1em;
+    text-align: center;
+    transition: all 0.3s;
+    cursor: pointer;
+    color: #fff;
+}
+
+.answer-box:hover {
+    background: #2d1b4e;
+    border-color: #ffa500;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(255, 107, 0, 0.5), 0 0 20px rgba(255, 107, 0, 0.3);
+}
+
+.answer-box.selected {
+    background: linear-gradient(135deg, #ff6b00 0%, #ff0000 100%);
+    color: white;
+    border-color: #ffa500;
+    box-shadow: 0 0 30px rgba(255, 107, 0, 0.8);
+}
+
+.answer-box.correct {
+    background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%);
+    color: #000;
+    border-color: #00ff00;
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.8);
+    animation: pulse-correct 0.5s ease-in-out;
+}
+
+.answer-box.wrong {
+    background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
+    color: white;
+    border-color: #ff0000;
+    box-shadow: 0 0 30px rgba(255, 0, 0, 0.8);
+    animation: shake-wrong 0.5s ease-in-out;
+}
+
+@keyframes pulse-correct {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes shake-wrong {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+/* Scrollbar cho danh sách câu hỏi */
+.questions-list-section::-webkit-scrollbar {
+    width: 10px;
+}
+
+.questions-list-section::-webkit-scrollbar-track {
+    background: #1a0b2e;
+    border-radius: 10px;
+}
+
+.questions-list-section::-webkit-scrollbar-thumb {
+    background: #ff6b00;
+    border-radius: 10px;
+}
+
+.questions-list-section::-webkit-scrollbar-thumb:hover {
+    background: #ffa500;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .game-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .wheel-section {
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    
+    .question-display {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.8em;
+    }
+
+    .wheel-container {
+        width: 300px;
+        height: 300px;
+    }
+
+    #wheelCanvas {
+        width: 300px !important;
+        height: 300px !important;
+    }
+
+    .answers-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .question-item-answers {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.question-display.show {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Empty state */
+.empty-state {
+    text-align: center;
+    color: #888;
+    padding: 40px;
+    font-style: italic;
+}
+
+/* Results Panel */
+.results-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    padding: 20px;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.results-panel {
+    background: linear-gradient(135deg, #2d1b4e 0%, #1a0b2e 100%);
+    border: 3px solid #ff6b00;
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 900px;
+    width: 100%;
+    box-shadow: 0 0 50px rgba(255, 107, 0, 0.8);
+    animation: slideUp 0.5s ease-out;
+}
+
+.results-panel h1 {
+    color: #ff6b00;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+}
+
+.results-panel h2 {
+    color: #ffa500;
+    margin: 30px 0 20px 0;
+    text-align: center;
+}
+
+.score-summary {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 30px;
+    padding: 30px;
+    background: #1a0b2e;
+    border-radius: 15px;
+    border: 2px solid #ff6b00;
+}
+
+.score-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #ff6b00 0%, #ff0000 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 30px rgba(255, 107, 0, 0.8);
+}
+
+.score-value {
+    font-size: 3em;
+    font-weight: 700;
+    color: white;
+}
+
+.score-label {
+    font-size: 1em;
+    color: #fff;
+}
+
+.score-details {
+    text-align: left;
+    color: #fff;
+}
+
+.score-details p {
+    font-size: 1.3em;
+    margin: 10px 0;
+}
+
+.score-details strong {
+    color: #ffa500;
+}
+
+.results-list {
+    max-height: 500px;
+    overflow-y: auto;
+    padding: 10px;
+}
+
+.result-item {
+    background: #1a0b2e;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 15px;
+    border: 2px solid #ff6b00;
+}
+
+.result-item.correct-item {
+    border-color: #00ff00;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+}
+
+.result-item.wrong-item {
+    border-color: #ff0000;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+}
+
+.result-header {
+    margin-bottom: 10px;
+}
+
+.result-number {
+    font-size: 1.2em;
+    font-weight: 700;
+    color: #ffa500;
+}
+
+.result-question {
+    color: #fff;
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.result-answers {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.result-answer {
+    background: #2d1b4e;
+    padding: 12px;
+    border-radius: 8px;
+    color: #ccc;
+    border: 2px solid #666;
+}
+
+.result-answer.answer-correct {
+    background: linear-gradient(135deg, #00ff00 0%, #00cc00 100%);
+    color: #000;
+    font-weight: 700;
+    border-color: #00ff00;
+}
+
+.result-answer.answer-wrong {
+    background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
+    color: #fff;
+    font-weight: 700;
+    border-color: #ff0000;
+}
+
+.results-buttons {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.btn-back-home {
+    padding: 15px 40px;
+    background: linear-gradient(135deg, #ff6b00 0%, #ff0000 100%);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.3em;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 0 20px rgba(255, 107, 0, 0.6);
+}
+
+.btn-back-home:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(255, 107, 0, 0.8);
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
