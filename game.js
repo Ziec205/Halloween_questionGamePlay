@@ -1,5 +1,6 @@
 // Lấy dữ liệu câu hỏi từ localStorage
-let questions = JSON.parse(localStorage.getItem('halloweenQuestions')) || [];
+let originalQuestions = JSON.parse(localStorage.getItem('halloweenQuestions')) || [];
+let questions = JSON.parse(JSON.stringify(originalQuestions)); // Copy để không ảnh hưởng bản gốc
 let gameResults = []; // Lưu kết quả các câu hỏi đã chơi
 
 // Biến quản lý vòng xoay
@@ -13,6 +14,31 @@ let selectedQuestionIndex = -1;
 
 // Màu sắc Halloween cho vòng xoay
 const colors = ['#FF6B00', '#FF0000', '#8B00FF', '#000000', '#FFA500', '#660000', '#4B0082', '#FF4500'];
+
+// 100+ tên nhân vật Halloween
+const halloweenCharacters = [
+    "👻 Ma", "🎃 Bí Ngô", "🦇 Dơi", "🧛 Ma Cà Rồng", "🧟 Zombie",
+    "💀 Đầu Lâu", "🕷️ Nhện", "🕸️ Mạng Nhện", "👹 Quỷ", "👺 Yêu Tinh",
+    "🧙 Phù Thủy", "🧙‍♀️ Mụ Phù Thủy", "🔮 Pha Lê", "⚰️ Quan Tài", "🪦 Bia Mộ",
+    "🌙 Trăng Máu", "⭐ Sao Ma", "🦴 Xương", "🩸 Máu", "🔪 Dao",
+    "🪓 Rìu", "⚡ Sét", "🌩️ Giông Bão", "🌫️ Sương Mù", "🌑 Trăng Tối",
+    "🕯️ Nến", "🏚️ Nhà Ma", "🏰 Lâu Đài", "⛪ Nhà Thờ", "🗿 Tượng Đá",
+    "👿 Ác Quỷ", "😈 Satan", "🤡 Hề Máu", "🎭 Mặt Nạ", "👁️ Con Mắt",
+    "🧠 Não", "❤️‍🔥 Tim Đen", "🫀 Trái Tim", "🫁 Phổi", "🦷 Răng Nanh",
+    "👄 Môi Máu", "💋 Nụ Hôn Tử", "🩹 Băng", "💉 Kim Tiêm", "💊 Thuốc Độc",
+    "🧪 Hóa Chất", "⚗️ Lọ Thuốc", "🔬 Thí Nghiệm", "🧬 DNA", "🦠 Vi Khuẩn",
+    "🐀 Chuột", "🐈‍⬛ Mèo Đen", "🐺 Sói", "🦉 Cú", "🦅 Đại Bàng Đêm",
+    "🐍 Rắn Độc", "🦂 Bọ Cạp", "🕊️ Chim Quạ", "🦴 Bộ Xương", "💀 Sọ Người",
+    "👹 Oni", "👺 Tengu", "🧛‍♀️ Lady Vampire", "🧛‍♂️ Count Dracula", "🧟‍♀️ Zombie Nữ",
+    "🧟‍♂️ Zombie Nam", "👻 Bóng Ma", "🌫️ Hồn Ma", "💨 Linh Hồn", "⚡ Sấm Sét",
+    "🌩️ Bão Tố", "🌪️ Lốc Xoáy", "🔥 Lửa Địa Ngục", "❄️ Băng Giá", "⛓️ Xích Sắt",
+    "🗡️ Kiếm", "⚔️ Gươm Đôi", "🏹 Cung Tên", "🛡️ Khiên", "🪃 Boomerang Tử",
+    "🔨 Búa", "⚒️ Cuốc", "🪚 Cưa", "🔧 Cờ Lê", "🪛 Tua Vít",
+    "🔩 Đinh Ốc", "⛏️ Chim Cuốc", "🪤 Bẫy", "🧨 Pháo", "💣 Bom",
+    "💥 Nổ", "🔫 Súng", "🗝️ Chìa Khóa", "🔐 Ổ Khóa", "🔓 Mở Khóa",
+    "📿 Chuỗi Hạt", "🔔 Chuông Đêm", "📯 Kèn", "🎺 Trumpet Ma", "🎻 Violin Đêm",
+    "🪕 Đàn Ma", "🥁 Trống Quỷ", "🔱 Đinh Ba", "⚰️ Hòm Quan Tài", "🪦 Mộ Cổ"
+];
 
 // Khởi tạo
 function init() {
@@ -48,14 +74,17 @@ function drawWheel() {
         ctx.lineWidth = 3;
         ctx.stroke();
         
-        // Vẽ số thứ tự
+        // Vẽ tên nhân vật Halloween thay vì số
         ctx.save();
         ctx.translate(200, 200);
         ctx.rotate(startAngle + anglePerSegment / 2);
         ctx.textAlign = 'center';
         ctx.fillStyle = 'white';
-        ctx.font = 'bold 24px Arial';
-        ctx.fillText(i + 1, 120, 10);
+        ctx.font = 'bold 16px Arial';
+        
+        // Lấy tên nhân vật theo index
+        const characterName = halloweenCharacters[i % halloweenCharacters.length];
+        ctx.fillText(characterName, 120, 10);
         ctx.restore();
     }
     
@@ -112,11 +141,11 @@ function animateWheel() {
         selectedQuestion = questions[selectedIndex];
         selectedQuestionIndex = selectedIndex;
         
-        // Xóa câu hỏi đã quay khỏi danh sách
+        // Xóa câu hỏi đã quay khỏi danh sách GAME (không xóa trong localStorage)
         questions.splice(selectedIndex, 1);
         
-        // Lưu lại vào localStorage
-        localStorage.setItem('halloweenQuestions', JSON.stringify(questions));
+        // KHÔNG lưu lại vào localStorage - giữ nguyên câu hỏi gốc
+        // localStorage.setItem('halloweenQuestions', JSON.stringify(questions));
         
         // Cập nhật số lượng câu hỏi
         updateQuestionCount();
@@ -139,7 +168,7 @@ function displayQuestion() {
     const questionText = document.getElementById('questionText');
     questionText.innerHTML = `
         <div style="margin-bottom: 10px;">
-            <span style="font-size: 0.8em; color: #ffa500;">🔥 Câu hỏi đã được sử dụng và xóa!</span>
+            <span style="font-size: 0.8em; color: #ffa500;">🔥</span>
         </div>
         ${selectedQuestion.question}
     `;
