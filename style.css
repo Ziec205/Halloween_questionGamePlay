@@ -878,6 +878,35 @@ h2 {
     animation: pulse-correct 0.5s ease-in-out;
 }
 
+/* Nút kết thúc game */
+.btn-end-game {
+    background: linear-gradient(135deg, #8b00ff 0%, #4b0082 100%);
+    color: white;
+    border: 3px solid #ff6b00;
+    border-radius: 10px;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100%;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s;
+    box-shadow: 0 5px 15px rgba(139, 0, 255, 0.4);
+}
+
+.btn-end-game:hover {
+    background: linear-gradient(135deg, #a020f0 0%, #6a0dad 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(139, 0, 255, 0.6), 0 0 30px rgba(255, 107, 0, 0.4);
+}
+
+.btn-end-game:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 10px rgba(139, 0, 255, 0.4);
+}
+
 .answer-box.wrong {
     background: linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
     color: white;
@@ -1093,6 +1122,12 @@ h2 {
 .result-item.wrong-item {
     border-color: #ff0000;
     box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+}
+
+.result-item.unanswered-item {
+    border-color: #ffa500;
+    box-shadow: 0 0 15px rgba(255, 165, 0, 0.3);
+    opacity: 0.85;
 }
 
 .result-header {

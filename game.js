@@ -230,9 +230,16 @@ function saveResult(selectedAnswerIndex) {
 
 // Hiển thị bảng kết quả
 function showResults() {
-    const totalQuestions = gameResults.length;
+    const totalQuestions = originalQuestions.length;
+    const answeredQuestions = gameResults.length;
     const correctAnswers = gameResults.filter(r => r.isCorrect).length;
-    const score = Math.round((correctAnswers / totalQuestions) * 100);
+    const score = answeredQuestions > 0 ? Math.round((correctAnswers / answeredQuestions) * 100) : 0;
+    
+    // Tạo map kết quả để dễ tra cứu
+    const resultsMap = {};
+    gameResults.forEach(result => {
+        resultsMap[result.question] = result;
+    });
     
     let resultsHTML = `
         <div class="results-overlay">
@@ -245,30 +252,44 @@ function showResults() {
                     </div>
                     <div class="score-details">
                         <p>✅ Đúng: <strong>${correctAnswers}</strong> câu</p>
-                        <p>❌ Sai: <strong>${totalQuestions - correctAnswers}</strong> câu</p>
+                        <p>❌ Sai: <strong>${answeredQuestions - correctAnswers}</strong> câu</p>
+                        <p>⏭️ Bỏ qua: <strong>${totalQuestions - answeredQuestions}</strong> câu</p>
                         <p>📊 Tổng: <strong>${totalQuestions}</strong> câu</p>
                     </div>
                 </div>
                 
-                <h2>📋 Chi Tiết Đáp Án</h2>
+                <h2>📋 Chi Tiết Tất Cả Câu Hỏi</h2>
                 <div class="results-list">
-                    ${gameResults.map((result, index) => `
-                        <div class="result-item ${result.isCorrect ? 'correct-item' : 'wrong-item'}">
-                            <div class="result-header">
-                                <span class="result-number">${result.isCorrect ? '✅' : '❌'} Câu ${index + 1}</span>
+                    ${originalQuestions.map((question, index) => {
+                        const result = resultsMap[question.question];
+                        const itemClass = result ? (result.isCorrect ? 'correct-item' : 'wrong-item') : 'unanswered-item';
+                        const icon = result ? (result.isCorrect ? '✅' : '❌') : '⏭️';
+                        
+                        return `
+                            <div class="result-item ${itemClass}">
+                                <div class="result-header">
+                                    <span class="result-number">${icon} Câu ${index + 1}</span>
+                                    ${!result ? '<span style="color: #ffa500; font-size: 0.9em;">(Chưa trả lời)</span>' : ''}
+                                </div>
+                                <div class="result-question">${question.question}</div>
+                                <div class="result-answers">
+                                    ${question.answers.map((ans, i) => {
+                                        const isCorrect = i === question.correctAnswer;
+                                        const isSelected = result && i === result.selectedAnswer;
+                                        const isWrong = isSelected && !result.isCorrect;
+                                        
+                                        return `
+                                            <div class="result-answer ${isCorrect ? 'answer-correct' : ''} ${isWrong ? 'answer-wrong' : ''}">
+                                                ${isCorrect ? '✓ ' : ''}
+                                                ${isWrong ? '✗ ' : ''}
+                                                ${ans}
+                                            </div>
+                                        `;
+                                    }).join('')}
+                                </div>
                             </div>
-                            <div class="result-question">${result.question}</div>
-                            <div class="result-answers">
-                                ${result.answers.map((ans, i) => `
-                                    <div class="result-answer ${i === result.correctAnswer ? 'answer-correct' : ''} ${i === result.selectedAnswer && !result.isCorrect ? 'answer-wrong' : ''}">
-                                        ${i === result.correctAnswer ? '✓ ' : ''}
-                                        ${i === result.selectedAnswer && !result.isCorrect ? '✗ ' : ''}
-                                        ${ans}
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </div>
-                    `).join('')}
+                        `;
+                    }).join('')}
                 </div>
                 
                 <div class="results-buttons">
@@ -291,6 +312,12 @@ function updateQuestionCount() {
 // Quay lại trang quản lý
 function backToManagement() {
     window.location.href = 'index.html';
+}
+
+// Kết thúc game sớm và hiển thị kết quả
+function endGameEarly() {
+    // Có thể kết thúc bất kỳ lúc nào, không cần kiểm tra đã trả lời hay chưa
+    showResults();
 }
 
 // Khởi động khi trang load

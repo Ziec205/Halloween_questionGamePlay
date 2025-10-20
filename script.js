@@ -1,31 +1,5 @@
 // Lấy dữ liệu từ localStorage hoặc sử dụng mặc định
-let questions = JSON.parse(localStorage.getItem('halloweenQuestions')) || [
-    {
-        question: "Con ma trong truyền thuyết thường sợ thứ gì?",
-        answers: ["Ánh sáng", "Tỏi", "Muối", "Tất cả các đáp án"],
-        correctAnswer: 3
-    },
-    {
-        question: "Halloween được tổ chức vào ngày nào?",
-        answers: ["30/10", "31/10", "1/11", "13/11"],
-        correctAnswer: 1
-    },
-    {
-        question: "Biểu tượng nào phổ biến nhất của Halloween?",
-        answers: ["Bí ngô", "Ma", "Dơi", "Mèo đen"],
-        correctAnswer: 0
-    },
-    {
-        question: "Dracula là loại quái vật gì?",
-        answers: ["Ma cà rồng", "Sói", "Xác sống", "Phù thủy"],
-        correctAnswer: 0
-    },
-    {
-        question: "Trick or Treat có nghĩa là gì?",
-        answers: ["Cho kẹo hoặc bị ghẹo", "Ma quỷ", "Hóa trang", "Đêm kinh hoàng"],
-        correctAnswer: 0
-    }
-];
+let questions = JSON.parse(localStorage.getItem('halloweenQuestions')) || [];
 
 let editingIndex = -1; // Index của câu hỏi đang chỉnh sửa
 
@@ -103,7 +77,7 @@ function spinWheel() {
 function animateWheel() {
     if (spinVelocity > 0.001) {
         currentRotation += spinVelocity;
-        spinVelocity *= 0.98; // Giảm tốc độ
+        spinVelocity *= 0.2; // Giảm tốc độ
         drawWheel();
         requestAnimationFrame(animateWheel);
     } else {
@@ -223,12 +197,10 @@ function saveQuestion() {
     if (editingIndex >= 0) {
         // Sửa câu hỏi
         questions[editingIndex] = questionData;
-        alert('✅ Đã cập nhật câu hỏi thành công!');
         cancelEdit();
     } else {
         // Thêm câu hỏi mới
         questions.push(questionData);
-        alert('✅ Đã thêm câu hỏi thành công!');
     }
     
     // Reset form
@@ -293,24 +265,20 @@ function cancelEdit() {
 
 // Xóa câu hỏi
 function deleteQuestion(index) {
-    if (confirm(`🎃 Bạn có chắc muốn xóa câu hỏi "${questions[index].question}"?`)) {
-        questions.splice(index, 1);
-        
-        // Lưu vào localStorage
-        saveToLocalStorage();
-        
-        // Cập nhật UI
-        updateQuestionCount();
-        renderQuestionsList();
-        
-        // Nếu đang sửa câu hỏi này thì hủy
-        if (editingIndex === index) {
-            cancelEdit();
-        } else if (editingIndex > index) {
-            editingIndex--;
-        }
-        
-        alert('✅ Đã xóa câu hỏi thành công!');
+    questions.splice(index, 1);
+    
+    // Lưu vào localStorage
+    saveToLocalStorage();
+    
+    // Cập nhật UI
+    updateQuestionCount();
+    renderQuestionsList();
+    
+    // Nếu đang sửa câu hỏi này thì hủy
+    if (editingIndex === index) {
+        cancelEdit();
+    } else if (editingIndex > index) {
+        editingIndex--;
     }
 }
 
