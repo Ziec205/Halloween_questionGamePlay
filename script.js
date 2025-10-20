@@ -137,7 +137,7 @@ function renderQuestionsList() {
     questionsList.innerHTML = questions.map((q, index) => `
         <div class="question-item">
             <div class="question-item-header">
-                <span class="question-number">🎃 Câu ${index + 1}</span>
+                <span class="question-number">🎃 ${q.name || 'Câu ' + (index + 1)}</span>
                 <div class="question-item-buttons">
                     <button class="btn-edit" onclick="editQuestion(${index})">✏️ Sửa</button>
                     <button class="btn-delete" onclick="deleteQuestion(${index})">🗑️ Xóa</button>
@@ -157,6 +157,7 @@ function renderQuestionsList() {
 
 // Lưu câu hỏi (Thêm hoặc Sửa)
 function saveQuestion() {
+    const questionName = document.getElementById('questionName');
     const questionInput = document.getElementById('questionInput');
     const answer1 = document.getElementById('answer1');
     const answer2 = document.getElementById('answer2');
@@ -167,6 +168,11 @@ function saveQuestion() {
     const correctAnswerRadio = document.querySelector('input[name="correctAnswer"]:checked');
     
     // Kiểm tra input
+    if (!questionName.value.trim()) {
+        alert('🎯 Vui lòng nhập tên cho câu hỏi (hiển thị trên vòng xoay)!');
+        return;
+    }
+    
     if (!questionInput.value.trim()) {
         alert('👻 Vui lòng nhập câu hỏi ma quái!');
         return;
@@ -184,6 +190,7 @@ function saveQuestion() {
     }
     
     const questionData = {
+        name: questionName.value.trim(),
         question: questionInput.value.trim(),
         answers: [
             answer1.value.trim(),
@@ -204,6 +211,7 @@ function saveQuestion() {
     }
     
     // Reset form
+    questionName.value = '';
     questionInput.value = '';
     answer1.value = '';
     answer2.value = '';
@@ -225,6 +233,7 @@ function editQuestion(index) {
     const question = questions[index];
     
     // Điền dữ liệu vào form
+    document.getElementById('questionName').value = question.name || '';
     document.getElementById('questionInput').value = question.question;
     document.getElementById('answer1').value = question.answers[0];
     document.getElementById('answer2').value = question.answers[1];
@@ -250,6 +259,7 @@ function cancelEdit() {
     editingIndex = -1;
     
     // Reset form
+    document.getElementById('questionName').value = '';
     document.getElementById('questionInput').value = '';
     document.getElementById('answer1').value = '';
     document.getElementById('answer2').value = '';

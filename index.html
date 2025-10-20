@@ -7,6 +7,12 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Background Music -->
+    <audio id="bgMusic" autoplay loop>
+        <source src="Music background.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
     <div class="halloween-bg">
         <div class="pumpkins pumpkin-1">🎃</div>
         <div class="pumpkins pumpkin-2">🎃</div>
@@ -36,6 +42,10 @@
                     <h2>
                         <span id="formTitle">🦇 Thêm Câu Hỏi Mới</span>
                     </h2>
+                    <div class="form-group">
+                        <label>Đặt tên câu hỏi (hiển thị trên vòng xoay):</label>
+                        <input type="text" id="questionName" placeholder="Ví dụ: Ma Cà Rồng, Người Sói, Zombie...">
+                    </div>
                     <div class="form-group">
                         <label>🕷️ Câu hỏi:</label>
                         <input type="text" id="questionInput" placeholder="Nhập câu hỏi ma quái...">
@@ -84,7 +94,7 @@
 
                 <!-- Danh sách câu hỏi -->
                 <div class="questions-list-section">
-                    <h2>📋 Danh Sách Câu Hỏi (<span id="questionCount">5</span> câu)</h2>
+                    <h2> Danh Sách Câu Hỏi (<span id="questionCount">5</span> câu)</h2>
                     <div id="questionsList" class="questions-list"></div>
                 </div>
 
@@ -99,7 +109,41 @@
                 </div>
             </div>
         </div>
+    
+    <!-- Music Control Button -->
+    <div class="music-control" onclick="toggleMusic()">
+        <span id="musicIcon">🔊</span>
+    </div>
 
     <script src="script.js"></script>
+    <script>
+        // Music control
+        const bgMusic = document.getElementById('bgMusic');
+        const musicIcon = document.getElementById('musicIcon');
+        let isPlaying = true;
+        
+        // Set volume to 30%
+        bgMusic.volume = 0.3;
+        
+        function toggleMusic() {
+            if (isPlaying) {
+                bgMusic.pause();
+                musicIcon.textContent = '🔇';
+                isPlaying = false;
+            } else {
+                bgMusic.play();
+                musicIcon.textContent = '🔊';
+                isPlaying = true;
+            }
+        }
+        
+        // Auto-play with user interaction fallback
+        bgMusic.play().catch(() => {
+            // If autoplay is blocked, wait for user interaction
+            document.body.addEventListener('click', () => {
+                bgMusic.play();
+            }, { once: true });
+        });
+    </script>
 </body>
 </html>

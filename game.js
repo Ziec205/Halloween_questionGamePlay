@@ -15,30 +15,23 @@ let selectedQuestionIndex = -1;
 // Màu sắc Halloween cho vòng xoay
 const colors = ['#FF6B00', '#FF0000', '#8B00FF', '#000000', '#FFA500', '#660000', '#4B0082', '#FF4500'];
 
-// 100+ tên nhân vật Halloween
-const halloweenCharacters = [
+// Tạo pool tên nhân vật Halloween (sẽ sinh động và đủ lớn - tối thiểu 1000 mục)
+const halloweenBase = [
     "👻 Ma", "🎃 Bí Ngô", "🦇 Dơi", "🧛 Ma Cà Rồng", "🧟 Zombie",
-    "💀 Đầu Lâu", "🕷️ Nhện", "🕸️ Mạng Nhện", "👹 Quỷ", "👺 Yêu Tinh",
-    "🧙 Phù Thủy", "🧙‍♀️ Mụ Phù Thủy", "🔮 Pha Lê", "⚰️ Quan Tài", "🪦 Bia Mộ",
-    "🌙 Trăng Máu", "⭐ Sao Ma", "🦴 Xương", "🩸 Máu", "🔪 Dao",
-    "🪓 Rìu", "⚡ Sét", "🌩️ Giông Bão", "🌫️ Sương Mù", "🌑 Trăng Tối",
-    "🕯️ Nến", "🏚️ Nhà Ma", "🏰 Lâu Đài", "⛪ Nhà Thờ", "🗿 Tượng Đá",
-    "👿 Ác Quỷ", "😈 Satan", "🤡 Hề Máu", "🎭 Mặt Nạ", "👁️ Con Mắt",
-    "🧠 Não", "❤️‍🔥 Tim Đen", "🫀 Trái Tim", "🫁 Phổi", "🦷 Răng Nanh",
-    "👄 Môi Máu", "💋 Nụ Hôn Tử", "🩹 Băng", "💉 Kim Tiêm", "💊 Thuốc Độc",
-    "🧪 Hóa Chất", "⚗️ Lọ Thuốc", "🔬 Thí Nghiệm", "🧬 DNA", "🦠 Vi Khuẩn",
-    "🐀 Chuột", "🐈‍⬛ Mèo Đen", "🐺 Sói", "🦉 Cú", "🦅 Đại Bàng Đêm",
-    "🐍 Rắn Độc", "🦂 Bọ Cạp", "🕊️ Chim Quạ", "🦴 Bộ Xương", "💀 Sọ Người",
-    "👹 Oni", "👺 Tengu", "🧛‍♀️ Lady Vampire", "🧛‍♂️ Count Dracula", "🧟‍♀️ Zombie Nữ",
-    "🧟‍♂️ Zombie Nam", "👻 Bóng Ma", "🌫️ Hồn Ma", "💨 Linh Hồn", "⚡ Sấm Sét",
-    "🌩️ Bão Tố", "🌪️ Lốc Xoáy", "🔥 Lửa Địa Ngục", "❄️ Băng Giá", "⛓️ Xích Sắt",
-    "🗡️ Kiếm", "⚔️ Gươm Đôi", "🏹 Cung Tên", "🛡️ Khiên", "🪃 Boomerang Tử",
-    "🔨 Búa", "⚒️ Cuốc", "🪚 Cưa", "🔧 Cờ Lê", "🪛 Tua Vít",
-    "🔩 Đinh Ốc", "⛏️ Chim Cuốc", "🪤 Bẫy", "🧨 Pháo", "💣 Bom",
-    "💥 Nổ", "🔫 Súng", "🗝️ Chìa Khóa", "🔐 Ổ Khóa", "🔓 Mở Khóa",
-    "📿 Chuỗi Hạt", "🔔 Chuông Đêm", "📯 Kèn", "🎺 Trumpet Ma", "🎻 Violin Đêm",
-    "🪕 Đàn Ma", "🥁 Trống Quỷ", "🔱 Đinh Ba", "⚰️ Hòm Quan Tài", "🪦 Mộ Cổ"
+    "💀 Đầu Lâu", "🐺 Người Sói", "🐈‍⬛ Mèo Đen", "🕷️ Nhện", "🧙 Phù Thủy",
+    "🏚️ Nhà Ma", "🦉 Cú", "🦂 Bọ Cạp", "🐍 Rắn", "🤡 Hề",
+    "👹 Quỷ", "👺 Yêu Tinh", "🧛‍♀️ Lady Vampire", "🧛‍♂️ Count Dracula", "🧟‍♀️ Zombie Nữ"
 ];
+
+// Sinh mảng 1000+ phần tử bằng cách kết hợp base với chỉ số nhóm để tránh trùng lặp
+const halloweenCharacters = [];
+const targetCount = 1000;
+for (let i = 0; i < targetCount; i++) {
+    const base = halloweenBase[i % halloweenBase.length];
+    const group = Math.floor(i / halloweenBase.length) + 1;
+    // Ví dụ: "� Ma #1", "� Bí Ngô #1", ... để dễ nhận biết
+    halloweenCharacters.push(`${base} #${group}`);
+}
 
 // Khởi tạo
 function init() {
@@ -74,18 +67,18 @@ function drawWheel() {
         ctx.lineWidth = 3;
         ctx.stroke();
         
-        // Vẽ tên nhân vật Halloween thay vì số
-        ctx.save();
-        ctx.translate(200, 200);
-        ctx.rotate(startAngle + anglePerSegment / 2);
-        ctx.textAlign = 'center';
-        ctx.fillStyle = 'white';
-        ctx.font = 'bold 16px Arial';
-        
-        // Lấy tên nhân vật theo index
-        const characterName = halloweenCharacters[i % halloweenCharacters.length];
-        ctx.fillText(characterName, 120, 10);
-        ctx.restore();
+    // Vẽ tên câu hỏi lên vòng xoay
+    ctx.save();
+    ctx.translate(200, 200);
+    ctx.rotate(startAngle + anglePerSegment / 2);
+    ctx.textAlign = 'center';
+    ctx.fillStyle = 'white';
+    ctx.font = 'bold 16px Arial';
+
+    // Dùng tên câu hỏi mà người dùng đã đặt
+    const segmentLabel = (questions[i] && questions[i].name) ? questions[i].name : `Câu ${i + 1}`;
+    ctx.fillText(segmentLabel, 110, 10);
+    ctx.restore();
     }
     
     // Vẽ tâm
@@ -109,6 +102,14 @@ function spinWheel() {
     isSpinning = true;
     document.getElementById('spinBtn').disabled = true;
     
+    // Phát âm thanh khi bắt đầu quay
+    const wheelSound = document.getElementById('wheelSound');
+    if (wheelSound) {
+        wheelSound.currentTime = 0;
+        wheelSound.volume = 0.5;
+        wheelSound.play().catch(err => console.log('Cannot play wheel sound:', err));
+    }
+    
     // Tốc độ quay ngẫu nhiên - GIẢM thời gian xuống còn 2.5s
     spinVelocity = Math.random() * 0.5 + 0.8;
     
@@ -131,6 +132,14 @@ function animateWheel() {
         isSpinning = false;
         document.getElementById('spinBtn').disabled = false;
         
+        // Phát âm thanh khi kết thúc quay
+        const endWheelSound = document.getElementById('endWheelSound');
+        if (endWheelSound) {
+            endWheelSound.currentTime = 0;
+            endWheelSound.volume = 0.6;
+            endWheelSound.play().catch(err => console.log('Cannot play end wheel sound:', err));
+        }
+        
         // Tính toán câu hỏi được chọn
         const normalizedRotation = currentRotation % (2 * Math.PI);
         const anglePerSegment = (2 * Math.PI) / questions.length;
@@ -138,11 +147,18 @@ function animateWheel() {
         // Mũi tên chỉ xuống (góc 0), ta cần tính segment ở vị trí đó
         let selectedIndex = Math.floor((2 * Math.PI - normalizedRotation) / anglePerSegment) % questions.length;
         
-        selectedQuestion = questions[selectedIndex];
-        selectedQuestionIndex = selectedIndex;
+    // Lấy đối tượng câu hỏi được chọn và nhãn segment (nếu có)
+    const picked = questions[selectedIndex];
+    const pickedSegment = picked && picked.segment ? picked.segment : halloweenCharacters[selectedIndex % halloweenCharacters.length];
         
-        // Xóa câu hỏi đã quay khỏi danh sách GAME (không xóa trong localStorage)
-        questions.splice(selectedIndex, 1);
+    // Gắn nhãn segment vào selectedQuestion để hiển thị
+    selectedQuestion = picked ? picked : null;
+    selectedQuestion = selectedQuestion ? Object.assign({}, selectedQuestion) : { question: 'Không có câu hỏi', answers: [], correctAnswer: -1 };
+    selectedQuestion.segment = pickedSegment;
+    selectedQuestionIndex = selectedIndex;
+        
+    // Xóa câu hỏi đã quay khỏi danh sách GAME (chỉ danh sách đang chơi), nhưng lưu nhãn đã được chọn để hiển thị trong kết quả
+    questions.splice(selectedIndex, 1);
         
         // KHÔNG lưu lại vào localStorage - giữ nguyên câu hỏi gốc
         // localStorage.setItem('halloweenQuestions', JSON.stringify(questions));
@@ -164,14 +180,16 @@ function displayQuestion() {
     const questionDisplay = document.getElementById('questionDisplay');
     questionDisplay.classList.add('show');
     
-    // Hiển thị thông báo câu hỏi đã bị xóa
+    // Hiển thị tên câu hỏi trong thẻ h2
+    const h2Element = questionDisplay.querySelector('h2');
+    if (h2Element && selectedQuestion.name) {
+        h2Element.innerHTML = `👻 ${selectedQuestion.name} 👻`;
+    }
+    
+    // Hiển thị nội dung câu hỏi trong questionText
     const questionText = document.getElementById('questionText');
-    questionText.innerHTML = `
-        <div style="margin-bottom: 10px;">
-            <span style="font-size: 0.8em; color: #ffa500;">🔥</span>
-        </div>
-        ${selectedQuestion.question}
-    `;
+    questionText.style.display = 'block';
+    questionText.textContent = selectedQuestion.question;
     
     const answersGrid = document.getElementById('answersGrid');
     answersGrid.innerHTML = '';
@@ -230,6 +248,13 @@ function saveResult(selectedAnswerIndex) {
 
 // Hiển thị bảng kết quả
 function showResults() {
+    // Phát âm thanh khi mở bảng kết quả
+    const resultSound = document.getElementById('resultSound');
+    if (resultSound) {
+        resultSound.currentTime = 0;
+        resultSound.play().catch(e => console.log('Result sound error:', e));
+    }
+    
     const totalQuestions = originalQuestions.length;
     const answeredQuestions = gameResults.length;
     const correctAnswers = gameResults.filter(r => r.isCorrect).length;
