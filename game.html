@@ -8,7 +8,7 @@
 </head>
 <body>
     <!-- Background Music -->
-    <audio id="bgMusic" autoplay loop>
+    <audio id="bgMusic" autoplay loop muted>
         <source src="Music gameplay.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
@@ -101,8 +101,19 @@
         const musicIcon = document.getElementById('musicIcon');
         let isPlaying = true;
         
-        // Set volume to 30%
-        bgMusic.volume = 0.3;
+        // Unmute and set volume to 30% after page loads
+        window.addEventListener('DOMContentLoaded', () => {
+            bgMusic.muted = false;
+            bgMusic.volume = 0.3;
+            bgMusic.play().catch(() => {
+                // If autoplay still blocked, wait for first user interaction
+                document.body.addEventListener('click', () => {
+                    bgMusic.muted = false;
+                    bgMusic.volume = 0.3;
+                    bgMusic.play();
+                }, { once: true });
+            });
+        });
         
         function toggleMusic() {
             if (isPlaying) {
@@ -115,14 +126,6 @@
                 isPlaying = true;
             }
         }
-        
-        // Auto-play with user interaction fallback
-        bgMusic.play().catch(() => {
-            // If autoplay is blocked, wait for user interaction
-            document.body.addEventListener('click', () => {
-                bgMusic.play();
-            }, { once: true });
-        });
     </script>
     
     <!-- Âm thanh vòng xoay -->
