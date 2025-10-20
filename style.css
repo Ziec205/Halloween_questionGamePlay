@@ -1308,16 +1308,6 @@ h2 {
     background: radial-gradient(circle at 30% 20%, rgba(255,140,0,0.06), transparent 30%);
 }
 
-/* Pointer styling (adjust position/size for small screens) */
-.wheel-pointer {
-    position: absolute;
-    top: 12%;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 30px;
-    pointer-events: none;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.7);
-}
 
 /* Right column: question + answers */
 .question-display {
@@ -1373,7 +1363,7 @@ h2 {
 @media (max-width: 900px) {
     .wheel-section { flex-basis: 40%; max-width: 40%; }
     .question-display { flex-basis: 60%; max-width: 60%; }
-    .wheel-pointer { font-size: 28px; top: 10%; }
+    .wheel-pointer { font-size: 35px; top: -30px; }
     .answers-grid { gap: 8px; }
 }
 
@@ -1395,7 +1385,7 @@ h2 {
     }
     .answers-grid { grid-template-columns: 1fr; } /* single column for readability */
     .question-text { max-height: 22vh; }
-    .wheel-pointer { font-size: 26px; top: 8%; }
+    .wheel-pointer { font-size: 28px; top: -25px; }
 }
 
 /* Extremely narrow screens: fallback to stacked layout */
@@ -1409,7 +1399,7 @@ h2 {
         flex-basis: auto;
     }
     .answers-grid { grid-template-columns: 1fr; }
-    .wheel-pointer { top: 6%; left: 50%; font-size: 28px; }
+    .wheel-pointer { font-size: 28px; top: -22px; }
 }
 
 @keyframes slideUp {

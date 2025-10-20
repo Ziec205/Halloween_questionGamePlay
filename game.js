@@ -144,8 +144,11 @@ function animateWheel() {
         const normalizedRotation = currentRotation % (2 * Math.PI);
         const anglePerSegment = (2 * Math.PI) / questions.length;
         
-        // Mũi tên chỉ xuống (góc 0), ta cần tính segment ở vị trí đó
-        let selectedIndex = Math.floor((2 * Math.PI - normalizedRotation) / anglePerSegment) % questions.length;
+        // Mũi tên chỉ lên trên (góc -π/2 hay 3π/2), cần điều chỉnh để tính segment ở vị trí 12 giờ
+        // Thêm π/2 để offset từ vị trí 3 giờ (0) lên vị trí 12 giờ (-π/2)
+        const pointerAngle = Math.PI / 2; // 90 độ = vị trí 12 giờ
+        const adjustedRotation = (normalizedRotation + pointerAngle) % (2 * Math.PI);
+        let selectedIndex = Math.floor((2 * Math.PI - adjustedRotation) / anglePerSegment) % questions.length;
         
     // Lấy đối tượng câu hỏi được chọn và nhãn segment (nếu có)
     const picked = questions[selectedIndex];
