@@ -221,6 +221,23 @@ function displayQuestion() {
 function saveResult(selectedAnswerIndex) {
     const isCorrect = selectedAnswerIndex === selectedQuestion.correctAnswer;
     
+    // Phát âm thanh dựa trên đáp án đúng hay sai
+    if (isCorrect) {
+        const trueAnswerSound = document.getElementById('trueAnswerSound');
+        if (trueAnswerSound) {
+            trueAnswerSound.currentTime = 0;
+            trueAnswerSound.volume = 0.7;
+            trueAnswerSound.play().catch(err => console.log('Cannot play true answer sound:', err));
+        }
+    } else {
+        const wrongAnswerSound = document.getElementById('wrongAnswerSound');
+        if (wrongAnswerSound) {
+            wrongAnswerSound.currentTime = 0;
+            wrongAnswerSound.volume = 0.7;
+            wrongAnswerSound.play().catch(err => console.log('Cannot play wrong answer sound:', err));
+        }
+    }
+    
     gameResults.push({
         question: selectedQuestion.question,
         answers: selectedQuestion.answers,
